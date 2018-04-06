@@ -1,0 +1,67 @@
+<div>
+    <h1>CheckOut</h1>
+      <div>
+      <div style="float : left; width : 30%;">
+        <h4>Shipping Address</h4>
+        <div>
+            <p>{{streetAddress}}</p>
+            <p>{{city}},{{state}}- {{postCode}}</p>
+        </div>
+
+      </div>
+    
+      <div style="float : left;">
+        <p style="color: red;" (click)="openModal(template)">Change</p>
+      </div>
+      </div>
+    
+      
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Address</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #basicInfoForm="ngForm">
+              <div role="presentation" class="row">
+                  <div class="col-xs-4" role="presentation" style="margin-right: 10px;">
+                    <div class="form-group" role="presentation">
+                      <label for="streetAddress">Street Address</label>
+                      <input required name="streetAddress"
+                             id="clubstreetAddress"  [(ngModel)]="streetAddress"
+                             class="form-control" placeholder="5555 John St">
+                    </div>
+                    
+                  </div>
+                  <div class="col-xs-3" role="presentation">
+                    <label for="city">City</label>
+                    <input required name="city" id="city"
+                            class="form-control" placeholder="Krikland" [(ngModel)]="city">
+                  </div>
+                  <div class="col-xs-2" role="presentation" style="margin-right: 10px;">
+                    <label for="state">State</label>
+                    <select required id="state" name="state"
+                            class="form-control" [(ngModel)]="state"> 
+                      <option *ngFor="let state of stateAbbrList" [value]="state">{{state}}</option>
+                    </select>
+                  </div>
+                  <div class="col-xs-2" role="presentation">
+                    <label for="zip">Zip</label>
+                    <input required name="postCode" id="postCode" 
+                           class="form-control" pattern="(\d{5}([\-]\d{4})?)" placeholder="12345"
+                            [(ngModel)]="postCode">
+                  </div>
+                </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="decline()" >Cancel</button>
+            <button type="button" [disabled]="!basicInfoForm" class="btn btn-primary" (click)="save()" >Save</button>
+          </div>  
+      </ng-template>
+    
+    
+    
+    </div>
